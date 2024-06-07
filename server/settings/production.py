@@ -19,7 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
+# 
 from . import get_secret
 SECRET_KEY = get_secret('SECRET_KEY')
 
@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'foodtruck.apps.FoodtruckConfig'
 ]
 
 MIDDLEWARE = [
@@ -75,11 +77,11 @@ WSGI_APPLICATION = 'server.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 # Change DATABASES to connect to a real database
-DB_NAME = get_secret("DB_NAME")
-DB_USER_NM = get_secret("DB_USER_NM")
-DB_USER_PW = get_secret("DB_USER_PW")
-DB_IP = get_secret("DB_IP")
-DB_PORT = get_secret("DB_PORT")
+DB_NAME = get_secret("POSTGRES_DB")
+DB_USER_NM = get_secret("POSTGRES_USER_NAME")
+DB_USER_PW = get_secret("POSTGRES_PASSWORD")
+DB_IP = get_secret("POSTGRES_HOST")
+DB_PORT = get_secret("POSTGRES_PORT")
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',

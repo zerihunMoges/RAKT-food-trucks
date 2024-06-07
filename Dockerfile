@@ -1,4 +1,4 @@
-# Use Python 3.12.2 image based on Debian Bullseye in its slim variant as the base image
+# Use Python 3.11 image based on Debian Bullseye in its slim variant as the base image
 FROM python:3.11-slim-bullseye
 
 # Set an environment variable to unbuffer Python output, aiding in logging and debugging

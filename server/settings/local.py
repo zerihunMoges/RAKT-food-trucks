@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-sh46#4%g@!yvass3i+gi4he5xzb&i!wqbats$#_l0xywfg15nc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'foodtruck.apps.FoodtruckConfig'
 ]
 
 MIDDLEWARE = [
@@ -71,12 +73,15 @@ WSGI_APPLICATION = 'server.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        "PASSWORD": 'postgres',
+        "HOST": 'db',
+        "PORT": 5432,
     }
 }
 
