@@ -30,7 +30,6 @@ ENV LD_LIBRARY_PATH /usr/lib
 
 # Set the command to run our web service using Gunicorn, binding it to 0.0.0.0 and the PORT environment variable
 CMD gunicorn server.wsgi:application --bind 0.0.0.0:"${PORT}"
-RUN python manage.py populate_foodtrucks
 
 
 
