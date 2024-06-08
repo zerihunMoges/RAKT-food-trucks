@@ -1,6 +1,6 @@
 import csv
-import datetime
 from django.core.management.base import BaseCommand
+from django.contrib.gis.geos import Point
 from foodtruck.models import FoodTruck
 
 class Command(BaseCommand):
@@ -18,18 +18,23 @@ class Command(BaseCommand):
                 status = row['Status'].upper() if row['Status'].upper() in dict(FoodTruck.STATUS_CHOICES) else 'UNKNOWN'
                 facility_type = row['FacilityType'].title() if row['FacilityType'].title() in dict(FoodTruck.FACILITY_TYPE_CHOICES) else 'Unknown'
 
+                try:
+                    latitude = float(row['Latitude'])
+                    longitude = float(row['Longitude'])
+                except ValueError:
+                    self.stdout.write(self.style.ERROR(f"Invalid latitude or longitude for {row['Applicant']}"))
+                    continue
+
+                location = Point(longitude, latitude, srid=4326)
+
                 FoodTruck.objects.create(
                     applicant=row['Applicant'],
                     facility_type=facility_type,
                     location_description=row['LocationDescription'],
                     address=row['Address'],
-                   
                     status=status,
                     food_items=food_items_list,
-                    x=row['X'],
-                    y=row['Y'],
-                    latitude=row['Latitude'],
-                    longitude=row['Longitude'],
-                    
+                    location=location
                 )
+
         self.stdout.write(self.style.SUCCESS('Successfully imported data'))

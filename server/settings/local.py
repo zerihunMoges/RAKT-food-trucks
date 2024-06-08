@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import dj_database_url
+from . import get_secret
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',  # Required for PostGIS PointField
     'rest_framework',
     'foodtruck.apps.FoodtruckConfig'
 ]
@@ -75,8 +77,9 @@ WSGI_APPLICATION = 'server.wsgi.application'
 
 # Database
 
+DB_URL = get_secret('DATABASE_URL')
 DATABASES = {
-    "default": dj_database_url.config(default='postgresql://postgres:xTpLIJrhHFqfcwZuHtmuDFgUMxyXWccr@roundhouse.proxy.rlwy.net:31802/railway', conn_max_age=1800),
+    "default": dj_database_url.config(default=DB_URL, conn_max_age=1800,engine='django.contrib.gis.db.backends.postgis'),
 }
 
 

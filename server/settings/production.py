@@ -24,7 +24,7 @@ from . import get_secret
 SECRET_KEY = get_secret('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'foodtruck.apps.FoodtruckConfig'
+    'foodtruck.apps.FoodtruckConfig',
+    'django.contrib.gis',  # Required for PostGIS PointField
 ]
 
 MIDDLEWARE = [
@@ -77,21 +78,11 @@ WSGI_APPLICATION = 'server.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 # Change DATABASES to connect to a real database
-DB_NAME = get_secret("POSTGRES_DB")
-DB_USER_NM = get_secret("POSTGRES_USER_NAME")
-DB_USER_PW = get_secret("POSTGRES_PASSWORD")
-DB_IP = get_secret("POSTGRES_HOST")
-DB_PORT = get_secret("POSTGRES_PORT")
+DB_URL = get_secret('DATABASE_URL')
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': DB_NAME,
-        'USER': DB_USER_NM,
-        "PASSWORD": DB_USER_PW,
-        "HOST": DB_IP,
-        "PORT": DB_PORT,
-    }
+    "default": dj_database_url.config(default=DB_URL, conn_max_age=1800,engine='django.contrib.gis.db.backends.postgis'),
 }
+
 
 
 # Password validation
