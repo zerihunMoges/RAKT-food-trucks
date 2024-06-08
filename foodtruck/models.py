@@ -26,3 +26,8 @@ class FoodTruck(models.Model):
 
     def __str__(self):
         return self.applicant
+
+    class Meta:
+        indexes = [
+            gis_models.Index(fields=['location'], name='location_idx'),
+        ]
