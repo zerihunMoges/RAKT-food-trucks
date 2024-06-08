@@ -82,7 +82,7 @@ To test the Django project, run the following command:
 
     docker-compose run web python manage.py test
 
-## 🚀 What I Would Like Improve
+## 🚀 What I Would Like To Improve
 
     Here are some ideas for improvements in our project:
 
