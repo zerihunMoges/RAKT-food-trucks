@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'server.wsgi.application'
 
 DB_URL = get_secret('DATABASE_URL')
 DATABASES = {
-    "default": dj_database_url.config(default=DB_URL, conn_max_age=1800,engine='django.contrib.gis.db.backends.postgis'),
+    "default": dj_database_url.config(default='postgres://postgres:FFBA55aBBcE5a2aC1eGa1gB1e6cA4D3B@monorail.proxy.rlwy.net:14099/railway', conn_max_age=1800,engine='django.contrib.gis.db.backends.postgis'),
 }
 
 
