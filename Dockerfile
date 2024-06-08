@@ -32,5 +32,6 @@ ENV LD_LIBRARY_PATH /usr/lib
 CMD gunicorn server.wsgi:application --bind 0.0.0.0:"${PORT}"
 
 
+
 # Inform Docker that the container listens on the specified network port at runtime
 EXPOSE ${PORT}

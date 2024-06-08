@@ -53,7 +53,7 @@ class FoodTruckListView(APIView):
     def get(self, request):
         longitude = request.query_params.get('long')
         latitude = request.query_params.get('lat')
-        search_radius = request.query_params.get('searchRadius', 10000)  # default to 10000 meters if not provided
+        search_radius = request.query_params.get('searchRadius', 1000)  # default to 1000 meters if not provided
         truckStatus = request.query_params.get('status')
         facility_type = request.query_params.get('facilityType')
 
