@@ -6,4 +6,4 @@ def get_secret(secret_id, backup=None):
 if get_secret('PIPELINE') == 'production':
     from .production import *
 else:
-    from .development import *
+    from .local import *
