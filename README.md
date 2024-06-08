@@ -38,7 +38,7 @@ To get started with FoodTruck in a Dockerized environment, follow these steps:
 
 ## Approach
 
-My approach to solve this problem is to build an API that allows users to retrieve nearby food trucks based on their location, radius, and other filters. However, if the result is less than 5, we will ignore the radius parameter and retrieve the 5 closest food trucks based on the location and other parameters.
+My approach to solve this problem is to build an API that allows users to retrieve nearby food trucks based on their location, search radius, and other filters. However, if the result is less than 5, we will ignore the radius parameter and retrieve the 5 closest food trucks based on the location and other parameters.
 
 To achieve this, we will utilize a combination of geospatial data and filtering techniques. By storing the food truck locations in a PostgreSQL database with the PostGIS extension, we can perform spatial queries and calculate distances between points. This will enable us to efficiently retrieve the nearby food trucks based on the user's provided location.
 
@@ -87,7 +87,8 @@ To test the Django project, run the following command:
     Here are some ideas for improvements in our project:
 
     - Implement a feature to find food trucks based on the type of food they serve.
-    - Enhance the project with more features to make it more feature-rich.
+    - use more attributes of food truck to enhance the project more 
+    - Enhance the project with more other features to make it more feature-rich.
 
 ## 📚 Learning
 
