@@ -24,6 +24,13 @@ To get started with FoodTruck in a Dockerized environment, follow these steps:
     ```
     docker-compose up
     ```
+    then open new terminal 
+    ```
+    docker-compose exec web python manage.py makemigrations
+    ```
+    ```
+    docker-compose exec web python manage.py migrate
+    ```
   
   
     This command will build the Docker image based on the Dockerfile and start the containers defined in the docker-compose.yaml file.
