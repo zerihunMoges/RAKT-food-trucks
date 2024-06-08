@@ -29,6 +29,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Application definition
 
@@ -41,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.gis',  # Required for PostGIS PointField
     'rest_framework',
-    'foodtruck.apps.FoodtruckConfig'
+    'foodtruck.apps.FoodtruckConfig',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
