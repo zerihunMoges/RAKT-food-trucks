@@ -19,7 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
+# 
 from . import get_secret
 SECRET_KEY = get_secret('SECRET_KEY')
 
@@ -38,16 +38,47 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'foodtruck.apps.FoodtruckConfig',
+    'django.contrib.gis',  # Required for PostGIS PointField
+    'corsheaders'
 ]
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ALLOW_CREDENTIALS = True
+
+
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
 ]
 
 ROOT_URLCONF = 'server.urls'
@@ -75,21 +106,11 @@ WSGI_APPLICATION = 'server.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 # Change DATABASES to connect to a real database
-DB_NAME = get_secret("DB_NAME")
-DB_USER_NM = get_secret("DB_USER_NM")
-DB_USER_PW = get_secret("DB_USER_PW")
-DB_IP = get_secret("DB_IP")
-DB_PORT = get_secret("DB_PORT")
+DB_URL = get_secret('DATABASE_URL')
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': DB_NAME,
-        'USER': DB_USER_NM,
-        "PASSWORD": DB_USER_PW,
-        "HOST": DB_IP,
-        "PORT": DB_PORT,
-    }
+    "default": dj_database_url.config(default=DB_URL, conn_max_age=1800,engine='django.contrib.gis.db.backends.postgis'),
 }
+
 
 
 # Password validation

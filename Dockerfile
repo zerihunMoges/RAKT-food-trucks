@@ -1,4 +1,4 @@
-# Use Python 3.12.2 image based on Debian Bullseye in its slim variant as the base image
+# Use Python 3.11 image based on Debian Bullseye in its slim variant as the base image
 FROM python:3.11-slim-bullseye
 
 # Set an environment variable to unbuffer Python output, aiding in logging and debugging
@@ -19,8 +19,18 @@ RUN pip install --upgrade pip
 # Install dependencies from the requirements.txt file to ensure our Python environment is ready
 RUN pip install -r requirements.txt
 
+# Setup GDAL
+RUN apt-get update && apt-get install -y \
+    gdal-bin \
+    libgdal-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+ENV GDAL_LIBRARY_PATH /usr/lib/libgdal.so
+ENV LD_LIBRARY_PATH /usr/lib
+
 # Set the command to run our web service using Gunicorn, binding it to 0.0.0.0 and the PORT environment variable
 CMD gunicorn server.wsgi:application --bind 0.0.0.0:"${PORT}"
+
 
 # Inform Docker that the container listens on the specified network port at runtime
 EXPOSE ${PORT}
