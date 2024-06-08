@@ -11,7 +11,7 @@ class Command(BaseCommand):
         FoodTruck.objects.all().delete()
         self.stdout.write(self.style.WARNING('Existing data cleared'))
 
-        with open('foodtruck/management/commands/food-truck-data.csv', 'r') as file:
+        with open('foodtruck/data/food-truck-data.csv', 'r') as file:
             reader = csv.DictReader(file)
             for row in reader:
                 food_items_list = row['FoodItems'].split(':') if row['FoodItems'] else []
