@@ -24,6 +24,8 @@ To get started with FoodTruck in a Dockerized environment, follow these steps:
     ```
     docker-compose up
     ```
+    This command will build the Docker image based on the Dockerfile and start the containers defined in the docker-compose.yaml file.
+   
     then open new terminal 
     ```
     docker-compose exec web python manage.py makemigrations
@@ -33,7 +35,7 @@ To get started with FoodTruck in a Dockerized environment, follow these steps:
     ```
   
   
-    This command will build the Docker image based on the Dockerfile and start the containers defined in the docker-compose.yaml file.
+    
 7. Access the FoodTruck application by navigating to `http://localhost:8000` in your web browser.
 
 ## Approach
